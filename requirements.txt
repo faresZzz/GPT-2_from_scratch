@@ -1,0 +1,10 @@
+tiktoken==0.8.0
+torch==2.6.0
+tensorflow==2.18.0
+matplotlib==3.10.0
+import-ipynb==0.2
+tqdm==4.67.1
+numpy==1.26.4
+pandas==2.2.3
+psutil==6.1.1
+scikit-learn==1.6.1
