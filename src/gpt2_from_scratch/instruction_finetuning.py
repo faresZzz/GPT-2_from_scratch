@@ -14,12 +14,9 @@ import numpy as np
 import pandas as pd
 import json
 from functools import partial
-import downloader
-import dataloaders
-import metrics
-from gpt_config import GPTConfig
-from gpt_model import GPTModel
-import text_generator
+from . import dataloaders, downloader, metrics, text_generator
+from .gpt_config import GPTConfig
+from .gpt_model import GPTModel
 
 
 

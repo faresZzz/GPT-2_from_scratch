@@ -6,12 +6,9 @@ import tiktoken
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 import time 
-from gpt_config import GPTConfig
-from gpt_model import GPTModel
-import text_generator
-import metrics
-import dataloaders
-import plots
+from .gpt_config import GPTConfig
+from .gpt_model import GPTModel
+from . import dataloaders, metrics, plots, text_generator
 
 def load_dataset(file_path):
     """

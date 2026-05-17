@@ -1,7 +1,7 @@
 # Description: Transformer block implementation
 import torch
 import torch.nn as nn
-import attention
+from . import attention
 
 
 class LayerNorm(nn.Module):
@@ -158,18 +158,16 @@ class TransformerBlock(nn.Module):
 
 
 if __name__ == '__main__':
-    from gpt_config import GPTConfig
-
-    CHOOSE_MODEL = GPTConfig.GPT2_SMALL
-    GPT_CONFIG_124M = GPTConfig.get_config(CHOOSE_MODEL)
-    GPT_CONFIG_124M["drop_rate"] = 0.1
-
     torch.manual_seed(123)
-    # 2 batches 
-    # 4 tokens
-    # 768 embedding dimension
-    x = torch.rand(2, 4, 768) 
-    block = TransformerBlock(GPT_CONFIG_124M)
+    smoke_config = {
+        "emb_dim": 16,
+        "context_length": 8,
+        "n_heads": 4,
+        "drop_rate": 0.0,
+        "qkv_bias": True,
+    }
+    x = torch.rand(2, 4, 16)
+    block = TransformerBlock(smoke_config)
     output = block(x)
     print("Input shape:", x.shape)
     print("Output shape:", output.shape)

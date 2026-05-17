@@ -32,19 +32,20 @@ The workflow is paper-to-code: take one idea from the literature, implement it i
 
 ```text
 src/
-  attention.py                 causal and multi-head self-attention
-  transformer.py               layer norm, feed-forward blocks, transformer blocks
-  gpt_model.py                 GPT-style model definition
-  gpt_config.py                model configuration presets
-  tokenizer.py                 tokenization utilities
-  dataloaders.py               dataset and dataloader helpers
-  train.py                     training and evaluation loops
-  pretraining.py               pretraining utilities
-  text_generator.py            autoregressive generation helpers
-  classification_finetuning.py spam/classification fine-tuning workflow
-  instruction_finetuning.py    instruction tuning workflow
-  metrics.py                   evaluation helpers
-  plots.py                     plotting utilities
+  gpt2_from_scratch/
+    attention.py                 causal and multi-head self-attention
+    transformer.py               layer norm, feed-forward blocks, transformer blocks
+    gpt_model.py                 GPT-style model definition
+    gpt_config.py                model configuration presets
+    tokenizer.py                 tokenization utilities
+    dataloaders.py               dataset and dataloader helpers
+    train.py                     training and evaluation loops
+    pretraining.py               pretraining utilities
+    text_generator.py            autoregressive generation helpers
+    classification_finetuning.py spam/classification fine-tuning workflow
+    instruction_finetuning.py    instruction tuning workflow
+    metrics.py                   evaluation helpers
+    plots.py                     plotting utilities
 
 Notebooks/
   attention.ipynb
@@ -74,16 +75,17 @@ Keeping them out of git keeps the repository light and avoids redistributing pap
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -e ".[dev]"
 ```
 
 Run a small model sanity check:
 
 ```bash
-python src/gpt_model.py
+python -m gpt2_from_scratch.gpt_model
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest -q
 ```
 
-Most experiments are run from the notebooks or from `src/text_generator.py`.
+Most experiments are run from the notebooks or from modules under `src/gpt2_from_scratch/`.
 
 ## Topics covered
 
@@ -102,3 +104,10 @@ Most experiments are run from the notebooks or from `src/text_generator.py`.
 ## Status
 
 The core implementation is present. I am still cleaning the notebooks and scripts so the public version reads like a study project someone can follow, not just a folder of experiments.
+
+## Limitations
+
+- This is a study implementation, not a production training framework.
+- The repository does not publish trained checkpoints, datasets, or copied literature PDFs.
+- Some notebooks are exploratory and optimized for learning the architecture step by step.
+- Full pretraining and fine-tuning runs require local data, local checkpoints, and enough compute for the selected model size.

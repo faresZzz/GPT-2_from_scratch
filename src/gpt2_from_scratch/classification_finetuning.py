@@ -18,11 +18,9 @@ import pandas as pd
 import json
 from functools import partial
 import psutil
-import downloader
-import dataloaders
-import metrics
-from gpt_config import GPTConfig
-from gpt_model import GPTModel
+from . import dataloaders, downloader, metrics
+from .gpt_config import GPTConfig
+from .gpt_model import GPTModel
 
 
 

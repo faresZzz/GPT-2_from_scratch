@@ -1,0 +1,32 @@
+[project]
+name = "gpt2-from-scratch"
+version = "0.1.0"
+description = "A study implementation of GPT-2-style transformer components in PyTorch."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "tiktoken==0.8.0",
+  "torch==2.6.0",
+  "tensorflow==2.18.0",
+  "matplotlib==3.10.0",
+  "import-ipynb==0.2",
+  "tqdm==4.67.1",
+  "numpy==1.26.4",
+  "pandas==2.2.3",
+  "psutil==6.1.1",
+  "scikit-learn==1.6.1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pre-commit>=3.7",
+  "pytest",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+

@@ -1,7 +1,7 @@
 # Description: GPT model implementation
 import torch
 import torch.nn as nn
-from transformer import LayerNorm, TransformerBlock
+from .transformer import LayerNorm, TransformerBlock
 
 class GPTModel(nn.Module):
     """
@@ -81,30 +81,22 @@ class GPTModel(nn.Module):
     
 
 if __name__ == '__main__':
-    import tiktoken
-    from gpt_config import GPTConfig
-
-    CHOOSE_MODEL = GPTConfig.GPT2_SMALL
-    GPT_CONFIG_124M = GPTConfig.get_config(CHOOSE_MODEL)
-    GPT_CONFIG_124M["drop_rate"] = 0.1
-    
     torch.manual_seed(123)
-    tokenizer = tiktoken.get_encoding("gpt2")
-    batch = []
-    txt1 = "Every effort moves you"
-    txt2 = "Every day holds a"
-    batch.append(torch.tensor(tokenizer.encode(txt1)))
-    batch.append(torch.tensor(tokenizer.encode(txt2)))
-    batch = torch.stack(batch, dim=0)
-
-
-    model = GPTModel(GPT_CONFIG_124M)
+    smoke_config = {
+        "vocab_size": 64,
+        "context_length": 8,
+        "emb_dim": 16,
+        "n_layers": 2,
+        "n_heads": 4,
+        "drop_rate": 0.0,
+        "qkv_bias": True,
+    }
+    batch = torch.tensor([[1, 2, 3, 4], [4, 3, 2, 1]])
+    model = GPTModel(smoke_config)
     out = model(batch)
     print("Input batch:\n", batch)
     print("\nOutput shape:", out.shape)
-    print(out)
     
-    # parameters
     total_params = sum(p.numel() for p in model.parameters())
     print(f"Total number of parameters: {total_params:,}")
 

@@ -9,3 +9,10 @@ repos:
           - tags
           - slideshow
           - --
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: detect-private-key
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
