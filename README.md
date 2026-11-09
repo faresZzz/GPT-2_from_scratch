@@ -72,11 +72,20 @@ Keeping them out of git keeps the repository light and avoids redistributing pap
 
 ## Quick start
 
+> **Important:** the pretrained GPT-2 weights and the virtual environment are not stored in git.
+> After cloning (or after a disk cleanup), run `./setup.sh` before anything else, or the notebooks will not find the weights.
+
 ```bash
-python -m venv .venv
+./setup.sh              # .venv + OpenAI GPT-2 124M and 355M weights (~1.9 GB)
+./setup.sh --small      # only the 124M weights
+./setup.sh --no-weights # Python environment only
+./setup.sh --test       # full setup, then run the smoke tests
 source .venv/bin/activate
-pip install -e ".[dev]"
 ```
+
+The script needs Python 3.10 (`brew install python@3.10`). It downloads the official GPT-2 weights released by OpenAI into `models/gpt2/124M` and `models/gpt2/355M`, and checks each file against its SHA-256. The same files can also be fetched from Python with `gpt2_from_scratch.downloader.download_and_load_gpt2()`.
+
+The weights under `models/pretrained/` and `models/finetuning/` are trained locally with the notebooks and are not downloadable.
 
 Run a small model sanity check:
 
